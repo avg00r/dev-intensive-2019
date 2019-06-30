@@ -24,4 +24,18 @@ data class User (
     init {
         println("May the Force be with ${firstName} ${lastName}!!!")
     }
+
+    companion object Factory {
+        private var lastId : Int = -1
+
+        fun makeUser(fullName : String?) : User {
+            lastId++
+
+            val parts : List<String>? = fullName?.split(" ")
+            val firstName = parts?.getOrNull(0)
+            val lastName = parts?.getOrNull(1)
+
+            return User(id = "$lastId", firstName = firstName, lastName = lastName)
+        }
+    }
 }
